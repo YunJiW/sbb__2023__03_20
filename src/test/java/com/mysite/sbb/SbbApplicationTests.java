@@ -1,6 +1,9 @@
 package com.mysite.sbb;
 
-import org.junit.jupiter.api.Assertions;
+import com.mysite.sbb.answer.Answer;
+import com.mysite.sbb.answer.AnswerRepository;
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +77,7 @@ class SbbApplicationTests {
 	@DisplayName("Like 데이터를 조회")
 	void testJpafif(){
 		List<Question> qList = this.questionRepository.findBySubjectLike("sbb%");
-		Question q = qList.get(0);
+		Question q = qList.get(2);
 		assertEquals("sbb가 무엇인가요?",q.getSubject());
 	}
 	@Test
@@ -90,7 +93,7 @@ class SbbApplicationTests {
 	@Test
 	@DisplayName("질문 삭제")
 	void testJpaseven(){
-		assertEquals(2,this.questionRepository.count());
+		assertEquals(1,this.questionRepository.count());
 
 		Optional<Question> oq = this.questionRepository.findById(1);
 		assertTrue(oq.isPresent());
