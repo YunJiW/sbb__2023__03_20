@@ -34,16 +34,19 @@ class SbbApplicationTests {
 		q1.setCreateDate(LocalDateTime.now());
 		this.questionRepository.save(q1);
 
+
 		Question q2 = new Question();
 		q2.setSubject("스프링부트 모델 질문입니다.");
 		q2.setContent("id는 자동으로 생성되나요?");
 		q2.setCreateDate(LocalDateTime.now());
 		this.questionRepository.save(q2);
+
+
 		 */
 		List<Question> all = this.questionRepository.findAll();
-		assertEquals(2,all.size());
+		assertEquals(3,all.size());
 
-		Question q = all.get(0);
+		Question q = all.get(1);
 		assertEquals("sbb가 무엇인가요?",q.getSubject());
 	}
 
@@ -62,23 +65,23 @@ class SbbApplicationTests {
 	@Test
 	@DisplayName("subject 값으로 데이터를 조회")
 	void testJpathird(){
-		Question q = this.questionRepository.findBySubject("sbb가 무엇인가요?");
-		assertEquals(1,q.getId());
+		Question q = this.questionRepository.findBySubjectAndId("sbb가 무엇인가요?",3);
+		assertEquals(3,q.getId());
 	}
 
 	@Test
 	@DisplayName("subject 값과 content를 and로 묶어서 데이터를 조회")
 	void testJpafourth(){
-		Question q = this.questionRepository.findBySubjectAndContent("sbb가 무엇인가요?","sbb에 대해서 알고 싶습니다.");
-		assertEquals(1,q.getId());
+		List<Question> qList = this.questionRepository.findBySubjectAndContent("sbb가 무엇인가요?","sbb에 대해서 알고 싶습니다.");
+		assertEquals(2,qList.size());
 	}
 
 	@Test
 	@DisplayName("Like 데이터를 조회")
 	void testJpafif(){
-		List<Question> qList = this.questionRepository.findBySubjectLike("sbb%");
-		Question q = qList.get(2);
-		assertEquals("sbb가 무엇인가요?",q.getSubject());
+		List<Question> qList = this.questionRepository.findBySubjectLike("스프%");
+		Question q = qList.get(0);
+		assertEquals("스프링부트 모델 질문입니다.",q.getSubject());
 	}
 	@Test
 	@DisplayName("질문 데이터 수정")
@@ -95,7 +98,7 @@ class SbbApplicationTests {
 	void testJpaseven(){
 		assertEquals(1,this.questionRepository.count());
 
-		Optional<Question> oq = this.questionRepository.findById(1);
+		Optional<Question> oq = this.questionRepository.findById(2);
 		assertTrue(oq.isPresent());
 		Question q = oq.get();
 		this.questionRepository.delete(q);
