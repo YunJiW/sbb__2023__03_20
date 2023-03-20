@@ -29,6 +29,9 @@ public class Question {
 
     //답을 저장할 리스트
     //질문을 지울경우 질문에 답한 답변을 전부 지운다.
+    //자바의 편의를 위해서 만들어짐 실제 db테이블 컬럼은 만들어지지 않음.
+    //만들어도되고 안만들어도된다.
+    //다만 만들면 해당 객체(질문 객체)에서 관련된 답변들을 찾을때 편하다.
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
 }
