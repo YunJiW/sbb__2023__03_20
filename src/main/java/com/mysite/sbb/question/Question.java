@@ -37,6 +37,7 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList = new ArrayList<>();
 
+    //규칙이라 생각하자!
     public void addAnswer(Answer a) {
         a.setQuestion(this);
         answerList.add(a);

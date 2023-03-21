@@ -60,7 +60,7 @@ class SbbApplicationTests {
 		Answer a = new Answer();
 		a.setContent("네 자동으로 생성됩니다.");
 		//a.setQuestion(q2); //db에 저장됨.
-		q2.addAnswer(a); // 양방향 으로 설정
+		q2.addAnswer(a); // 설정으로 저장한다.
 		a.setCreateDate(LocalDateTime.now());
 		this.answerRepository.save(a);
 	}
