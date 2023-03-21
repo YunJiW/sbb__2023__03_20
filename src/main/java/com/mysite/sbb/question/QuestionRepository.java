@@ -10,7 +10,6 @@ public interface QuestionRepository extends JpaRepository<Question,Integer> {
     Question findBySubject(String subject);
     List<Question> findBySubjectAndContent(String subject,String content);
 
-    Question findBySubjectAndId(String subject,Integer id);
     List<Question> findBySubjectLike(String subject);
     @Query(value = "ALTER TABLE question AUTO_INCREMENT = 1", nativeQuery = true)
     void clearAutoIncrement();
