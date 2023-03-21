@@ -31,6 +31,11 @@ class SbbApplicationTests {
 	@BeforeEach
 		// 아래 메서드는 각 테스트케이스가 실행되기 전에 실행된다.
 	void beforeEach() {
+
+
+		answerRepository.deleteAll();
+		answerRepository.clearAutoIncrement();
+
 		// 모든 데이터 삭제
 		questionRepository.deleteAll();
 
@@ -50,6 +55,14 @@ class SbbApplicationTests {
 		q2.setContent("id는 자동으로 생성되나요?");
 		q2.setCreateDate(LocalDateTime.now());
 		questionRepository.save(q2);  // 두번째 질문 저장
+
+
+		Answer a = new Answer();
+		a.setContent("네 자동으로 생성됩니다.");
+		//a.setQuestion(q2); //db에 저장됨.
+		q2.addAnswer(a); // 양방향 으로 설정
+		a.setCreateDate(LocalDateTime.now());
+		this.answerRepository.save(a);
 	}
 
 
@@ -157,7 +170,7 @@ class SbbApplicationTests {
 	}
 
 	@Test
-	@DisplayName("질문을 통해서 답변을 조회")
+	@DisplayName("질문을 연결된 답변을 조회")
 	@Transactional
 	//매서드가 종룔될때 까지 DB세션이 유지됩니다.
 	void testJpa_answerthird(){
@@ -167,7 +180,7 @@ class SbbApplicationTests {
 
 		List<Answer> answerList = q.getAnswerList();
 
-		assertEquals(2,answerList.size());
+		assertEquals(1,answerList.size());
 		assertEquals("네 자동으로 생성됩니다.",answerList.get(0).getContent());
 	}
 }
