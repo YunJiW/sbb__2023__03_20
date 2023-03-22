@@ -4,6 +4,7 @@ import com.mysite.sbb.answer.Answer;
 import com.mysite.sbb.answer.AnswerRepository;
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.question.QuestionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,8 @@ class SbbApplicationTests {
 
 	@Autowired
 	private QuestionRepository questionRepository;
+	@Autowired
+	private QuestionService questionService;
 
 	@Autowired
 	private AnswerRepository answerRepository;
@@ -64,6 +67,17 @@ class SbbApplicationTests {
 		q2.addAnswer(a); // 설정으로 저장한다.
 		a.setCreateDate(LocalDateTime.now());
 		this.answerRepository.save(a);
+	}
+
+	@Test
+	@DisplayName("데이터 300개 넣기")
+	void TestdataAdding(){
+		for(int idx = 1; idx <=300; idx++){
+			String subject = String.format("테스트 데이터입니다 :[%03d]",idx);
+
+			String content ="내용무";
+			this.questionService.create(subject,content);
+		}
 	}
 
 
