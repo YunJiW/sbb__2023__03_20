@@ -28,6 +28,7 @@ class SbbApplicationTests {
 	@Autowired
 	private AnswerRepository answerRepository;
 
+
 	@BeforeEach
 		// 아래 메서드는 각 테스트케이스가 실행되기 전에 실행된다.
 	void beforeEach() {
@@ -64,6 +65,7 @@ class SbbApplicationTests {
 		a.setCreateDate(LocalDateTime.now());
 		this.answerRepository.save(a);
 	}
+
 
 
 	@Test
