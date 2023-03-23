@@ -46,6 +46,7 @@ class SbbApplicationTests {
 		// 흔적삭제(다음번 INSERT 때 id가 1번으로 설정되도록)
 		questionRepository.clearAutoIncrement();
 
+		/*
 		// 질문 1개 생성
 		Question q1 = new Question();
 		q1.setSubject("sbb가 무엇인가요?");
@@ -67,6 +68,7 @@ class SbbApplicationTests {
 		q2.addAnswer(a); // 설정으로 저장한다.
 		a.setCreateDate(LocalDateTime.now());
 		this.answerRepository.save(a);
+		*/
 	}
 
 	@Test
@@ -76,7 +78,7 @@ class SbbApplicationTests {
 			String subject = String.format("테스트 데이터입니다 :[%03d]",idx);
 
 			String content ="내용무";
-			this.questionService.create(subject,content);
+			this.questionService.create(subject,content,null);
 		}
 	}
 
