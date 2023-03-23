@@ -17,6 +17,10 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests().requestMatchers(
                 new AntPathRequestMatcher("/**")).permitAll()
+                .and()
+                    .formLogin()
+                    .loginPage("/user/login")
+                    .defaultSuccessUrl("/")
         ;
         return http.build();
     }
@@ -25,4 +29,5 @@ public class SecurityConfig {
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
 }
