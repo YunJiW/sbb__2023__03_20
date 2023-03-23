@@ -14,7 +14,9 @@ public class SiteUser  {
     private Long id;
 
     @Column(unique = true)
-    private String name;
+    private String username;
+
+    private String password;
 
     @Column(unique = true)
     private String email;
